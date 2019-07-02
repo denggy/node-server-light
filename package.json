@@ -1,0 +1,24 @@
+{
+  "name": "node-server-light",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "supervisor -harmony src/app.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-body": "^4.0.8",
+    "koa-router": "^7.4.0",
+    "sqlite3": "^4.0.6"
+  },
+  "author": "denggy",
+  "license": "ISC",
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}
