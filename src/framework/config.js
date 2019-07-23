@@ -1,6 +1,6 @@
 module.exports = {
   port: 3000,
-  authorization: true,
+  authorization: false,
   contextPath: '/api',
   dbType: 'sqlite'
 }

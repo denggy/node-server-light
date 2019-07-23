@@ -22,3 +22,11 @@ jsconfig.json
 # vscode
 /.vscode
 
+# upload
+/public/upload
+
+# logs
+/back-end
+
+# sqlite.db
+/src/dao/sqlite/sqlite.db

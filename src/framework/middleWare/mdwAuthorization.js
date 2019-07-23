@@ -8,7 +8,8 @@ module.exports = ()=>{
     if (authorization === false) {
       await next();
     } else {
-      if (path.replace(contextPath, '') === '/login' || path === contextPath) {
+      // eslint-disable-next-line
+      if (path.replace(contextPath, '') === '/login' || path === contextPath || path === '/favicon.ico') {
         await next();
       } else {
         const token = ctx.request.headers.authorization;

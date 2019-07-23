@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const fileService = require('../services/fileService');
 
-exports.upload = async ({request, response, throw: throws}) => {
+exports.upload = async ({request, response}) => {
   // 上传多个文件
   let files = request.files.file; // 获取上传文件
   if (!Array.isArray(files)) {
@@ -17,7 +17,7 @@ exports.upload = async ({request, response, throw: throws}) => {
       const timeStamp = new Date().getTime();
       console.log(timeStamp)
       const savePath = `/public/upload/${timeStamp}.${file.name}`;
-      const filePath = path.join(__dirname, `../../..${savePath}`);
+      const filePath = path.join(__dirname, `../../../..${savePath}`);
       // 创建可写流
       console.log(filePath);
       console.log(file.path);
@@ -27,7 +27,7 @@ exports.upload = async ({request, response, throw: throws}) => {
       // writeStream.close();
       // readerStream.close();
       // 保存到数据库中id与路径的映射
-      const fileId = await fileService.saveFile(savePath);
+      const fileId = await fileService.saveFile(savePath); //eslint-disable-line
       result.push(fileId);
     }
   }
@@ -42,7 +42,7 @@ exports.download = async ({request, response, throw: throws}) => {
   if (id) {
     const {filePath} = await fileService.get(id) || {};
     if (filePath) {
-      const p = path.join(__dirname, `../../..${filePath}`);
+      const p = path.join(__dirname, `../../../..${filePath}`);
       const filename = getFileName(p);
       response.set('Content-disposition', `attachment;filename=${filename}`);
       response.set('Content-Type', '');
