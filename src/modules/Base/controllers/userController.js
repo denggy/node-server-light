@@ -45,13 +45,20 @@ exports.updateUser = async ({request, response, throw: throws}) => {
   };
 }
 
-exports.login = async ({request, response, throw: throws})=>{
+exports.login = async ({request, response, session, throw: throws})=>{
   const inputs = request.body;
   if (!inputs) {
-    throws(400, 'this request need param')
+    throws(400, 'This request need param')
+  } else if (!inputs.username || !inputs.password) {
+    throws(400, 'The username or password not be null')
+  } else if (!inputs.captcha) {
+    throws(400, 'The captcha not be null')
+  } else if (inputs.captcha !== session.captcha) {
+    throws(400, 'Captcha error')
+  } else {
+    const result = await userService.login(inputs);
+    response.body = {
+      result
+    };
   }
-  const result = await userService.login(inputs);
-  response.body = {
-    result
-  };
 }

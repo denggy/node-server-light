@@ -7,6 +7,7 @@ const mdwLog = require('./framework/middleWare/mdwLog');
 const mdwErrorHandle = require('./framework/middleWare/mdwErrorHandle');
 const mdwAuthorization = require('./framework/middleWare/mdwAuthorization');
 const mdwRouterHandle = require('./framework/middleWare/mdwRouterHandle');
+const mdwSession = require('./framework/middleWare/mdwSession');
 const {port} = require('./framework/config');
 
 const app = new Koa();
@@ -22,6 +23,9 @@ app.use(mdwLog());
 
 // 设置响应头
 app.use(mdwResponseSetting());
+
+// 设置session
+app.use(mdwSession(app));
 
 // 错误处理
 app.use(mdwErrorHandle());

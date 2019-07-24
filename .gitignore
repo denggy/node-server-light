@@ -24,6 +24,7 @@ jsconfig.json
 
 # upload
 /public/upload
+/public/session
 
 # logs
 /back-end

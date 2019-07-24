@@ -1,10 +1,21 @@
+const fs = require('fs');
+const path = require('path');
 const userCtrl = require('../modules/Base/controllers/userController.js');
 const fileCtrl = require('../modules/Base/controllers/fileController.js');
+const captchaCtrl = require('../modules/Base/controllers/captchaController.js');
 const indexPage = require('../pages');
+// const image = require('../pages/favicon.ico');
 
 const index = (ctx) => {
   ctx.type = 'text/html;charset=utf-8';
   ctx.response.body = indexPage();
+}
+
+const favicon = (ctx) =>{
+  const p = path.join(__dirname, '../pages/favicon.ico');
+  const image = fs.createReadStream(p);
+  ctx.type = 'image/png';
+  ctx.body = image;
 }
 
 const routerConfig = {
@@ -52,6 +63,14 @@ const routerConfig = {
     path: '/login',
     controller: userCtrl.login,
     method: 'post'
+  },
+  {
+    path: '/captcha',
+    controller: captchaCtrl.captcha,
+  },
+  {
+    path: '/favicon.ico',
+    controller: favicon,
   }]
 }
 

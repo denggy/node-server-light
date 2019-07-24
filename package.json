@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "bluebird": "^3.5.5",
+    "ccap": "^0.6.10",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.0.8",
     "koa-log4": "^2.3.2",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.12.2",
     "sqlite3": "^4.0.6"
   },
   "author": "denggy",

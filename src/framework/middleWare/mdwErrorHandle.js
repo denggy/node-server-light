@@ -2,16 +2,26 @@ const { logger } = require('../utils/logHandler');
 
 module.exports = ()=>{
   return async (ctx, next) => {
-    const result = await next().catch((err) => {
-      console.log('noAuth', err);
+    await next().catch((err) => {
+      console.log('login error', err);
       logger.error(err);
       if (err.status === 401) {
         ctx.status = 401;
-        ctx.body = 'You do not have access to this resource';
+        ctx.body = {
+          result: {
+            code: err.status,
+            message: 'You do not have access to this resource'
+          }
+        };
       } else {
-        throw err;
+        ctx.status = err.status;
+        ctx.body = {
+          result: {
+            code: err.status,
+            message: err.message
+          }
+        };
       }
     })
-    return result;
   }
 }
