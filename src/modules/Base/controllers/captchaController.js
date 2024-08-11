@@ -1,10 +1,8 @@
-const ccap = require('ccap')();
+const svgCaptcha = require('svg-captcha');
 
 exports.captcha = (ctx) => {
-  const ary = ccap.get();
-  const txt = ary[0];
-  const buf = ary[1];
-  ctx.body = buf;
-  ctx.type = 'image/png';
-  ctx.session.captcha = txt.toLowerCase();
+  var captcha = svgCaptcha.create();
+  ctx.body = captcha.data;
+  ctx.type = 'svg';
+  ctx.session.captcha = captcha.text.toLocaleLowerCase();
 }
